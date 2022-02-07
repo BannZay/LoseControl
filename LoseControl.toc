@@ -16,6 +16,7 @@
 ## X-Website2: http://www.wowinterface.com/downloads/info11642-LoseControl.html
 ## X-Category: Buffs
 ## SavedVariablesPerCharacter: LoseControlDB
+## Dependency: CircleCooldownTemplate
 
 localization.lua
 LoseControl.lua

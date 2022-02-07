@@ -303,7 +303,7 @@ local LoseControlDB -- local reference to the addon settings. this gets initiali
 
 -------------------------------------------------------------------------------
 -- Create the main class
-local LoseControl = CreateFrame("Cooldown", nil, UIParent) -- Exposes the SetCooldown method
+local LoseControl = CreateFrame("Frame", nil, UIParent, "CircleCooldownFrameTemplate") -- Exposes the SetCooldown method
 
 function LoseControl:OnEvent(event, ...) -- functions created in "object:method"-style have an implicit first parameter of "self", which points to object
 	self[event](self, ...) -- route event parameters to LoseControl:event methods
@@ -477,7 +477,7 @@ end
 
 -- Constructor method
 function LoseControl:new(unitId)
-	local o = CreateFrame("Cooldown", L .. unitId) --, UIParent)
+	local o = CreateFrame("Frame", L .. unitId, nil, "CircleCooldownFrameTemplate") --, UIParent)
 	setmetatable(o, self)
 	self.__index = self
 
@@ -552,7 +552,7 @@ function Unlock:OnClick()
 				v:SetMovable(true)
 				v:RegisterForDrag("LeftButton")
 				v:EnableMouse(true)
-				v.texture:SetTexture(select(3, GetSpellInfo(keys[random(#keys)])))
+				SetPortraitToTexture(v.texture, select(3, GetSpellInfo(keys[random(#keys)])))
 				v:SetParent(nil) -- detach the frame from its parent or else it won't show if the parent is hidden
 				--v:SetFrameStrata(frame.strata or "MEDIUM")
 				if v.anchor:GetParent() then
